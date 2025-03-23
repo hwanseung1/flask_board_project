@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="post-container">
+        <h1>{{ post[1] }}</h1>  <!-- 제목 -->
+        <p class="post-content">{{ post[2] }}</p>  <!-- 내용 -->
+        <p class="post-meta">작성자: {{ post[3] }} | 작성일: {{ post[4] }}</p>  <!-- 작성자 & 작성일 -->
+
+        {% if session['user_id'] == post[3] %}
+        <div class="post-actions">
+            <a href="/board/edit/{{ post[0] }}" class="btn btn-edit">수정</a>
+            <a href="/board/delete/{{ post[0] }}" class="btn btn-delete" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+        </div>
+        {% endif %}
+
+        <a href="/board" class="btn btn-back">목록으로 돌아가기</a>
+    </div>
+{% endblock %}

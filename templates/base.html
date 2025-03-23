@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STMG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- flash 메시지 처리 (JavaScript로 경고창 띄우기) -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script type="text/javascript">
+                {% for message in messages %}
+                    alert("{{ message }}");
+                {% endfor %}
+            </script>
+        {% endif %}
+    {% endwith %}
+
+    <header>
+        {% if session['user_id'] %}
+            <!-- 로그인한 경우에만 로그아웃 버튼 표시 -->
+            <a href="/logout">로그아웃</a>
+        {% else %}
+            <!-- 로그인하지 않은 경우 로그인 버튼 표시 -->
+            <a href="/login">로그인</a>
+        {% endif %}
+            <a href="/board">자유게시판</a>
+    </header>
+
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+
